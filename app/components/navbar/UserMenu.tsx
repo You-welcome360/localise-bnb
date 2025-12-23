@@ -61,7 +61,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             cursor-pointer
           "
         >
-          Airbnb your home
+          Add a suite
         </div>
         )}
         <div 
@@ -95,7 +95,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
             rounded-xl 
             shadow-md
             w-64
-            md:w-3/4 
             bg-white 
             overflow-hidden 
             right-0 
@@ -109,7 +108,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
               <p className="text-lg pl-4">Hi , {currentUser.name}</p>
                 <hr />
                 <MenuItem 
-                  label="My trips" 
+                  label="Booked Rooms" 
                   onClick={() => router.push('/trips')}
                 />
                 <MenuItem 
@@ -128,7 +127,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   onClick={() => router.push('/properties')}
                 />
                 <MenuItem 
-                  label="Airbnb your home" 
+                  label="Add a suite" 
                   onClick={rentModal.onOpen}
                 />
                   </>
