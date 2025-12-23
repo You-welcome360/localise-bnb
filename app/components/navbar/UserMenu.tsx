@@ -95,7 +95,6 @@ const UserMenu: React.FC<UserMenuProps> = ({
             rounded-xl 
             shadow-md
             w-64
-            md:w-3/4 
             bg-white 
             overflow-hidden 
             right-0 
