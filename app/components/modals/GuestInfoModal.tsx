@@ -13,6 +13,14 @@ const GuestInfoModal = () => {
     return null;
   }
 
+  function maskGhanaCard(cardNumber: string | number) {
+  const str = cardNumber.toString();
+  if (str.length <= 4) return str; // Too short, show as-is
+  const masked = str.slice(0, -4).replace(/./g, '*'); // Mask all but last 4
+  const last4 = str.slice(-4);
+  return `${masked}${last4}`;
+}
+
   return (
     <Modal
       isOpen={infoModal.isOpen}
@@ -41,7 +49,7 @@ const GuestInfoModal = () => {
             {reservation.ghanaCardNumber && (
               <p>
                 <span className="font-semibold">Ghana Card:</span>{' '}
-                {reservation.ghanaCardNumber}
+                {maskGhanaCard(reservation.ghanaCardNumber)}
               </p>
             )}
 
