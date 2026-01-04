@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from 'date-fns';
 
-import useCountries from "@/app/hooks/useCountries";
 import {
   SafeListing,
   SafeReservation,
@@ -14,7 +13,6 @@ import {
 
 import HeartButton from "../HeartButton";
 import Button from "../Button";
-import ClientOnly from "../ClientOnly";
 import { FaUserCircle } from "react-icons/fa";
 import useInfoModal from "@/app/hooks/useInfoModel";
 
@@ -39,6 +37,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   const router = useRouter();
   const infoModal = useInfoModal();
+  
   // const { getByValue } = useCountries();
 
   // const location = getByValue(data.locationValue);
@@ -112,7 +111,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
               currentUser={currentUser}
             />
           </div>
-          {reservation && (
+          {reservation && currentUser?.role === 'ADMIN' && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
