@@ -2,7 +2,7 @@
 
 <div align="center">
   
-  <a href="https://rent-clone-nextjs.vercel.app/" target="_blank">↪️ Demo</a>
+  <a href="https://localise-bnb.vercel.app/" target="_blank">↪️ Demo</a>
   <br />
   <br />
   
