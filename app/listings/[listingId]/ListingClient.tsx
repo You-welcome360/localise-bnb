@@ -15,6 +15,8 @@ import { categories } from "@/app/components/navbar/Categories";
 import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
 import ListingReservation from "@/app/components/listings/ListingReservation";
+import useReservationModal from "@/app/hooks/useReservationModal";
+import ReservationModal from "@/app/components/modals/ReservationModal";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -61,39 +63,47 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+  const reservationModal = useReservationModal();
 
-  const onCreateReservation = useCallback(() => {
-      if (!currentUser) {
+  const onResereve = useCallback(()=>{
+    if (!currentUser) {
         return loginModal.onOpen();
       }
-      setIsLoading(true);
+      reservationModal.onOpen();
+  },[currentUser,loginModal,reservationModal])
 
-      axios.post('/api/reservations', {
-        totalPrice,
-        startDate: dateRange.startDate,
-        endDate: dateRange.endDate,
-        listingId: listing?.id
-      })
-      .then(() => {
-        toast.success('Listing reserved!');
-        setDateRange(initialDateRange);
-        router.push('/trips');
-      })
-      .catch(() => {
-        toast.error('Something went wrong.');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
-  },
-  [
-    totalPrice, 
-    dateRange, 
-    listing?.id,
-    router,
-    currentUser,
-    loginModal
-  ]);
+  // const onCreateReservation = useCallback(() => {
+  //     if (!currentUser) {
+  //       return loginModal.onOpen();
+  //     }
+  //     setIsLoading(true);
+
+  //     axios.post('/api/reservations', {
+  //       totalPrice,
+  //       startDate: dateRange.startDate,
+  //       endDate: dateRange.endDate,
+  //       listingId: listing?.id
+  //     })
+  //     .then(() => {
+  //       toast.success('Listing reserved!');
+  //       setDateRange(initialDateRange);
+  //       router.push('/trips');
+  //     })
+  //     .catch(() => {
+  //       toast.error('Something went wrong.');
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     })
+  // },
+  // [
+  //   totalPrice, 
+  //   dateRange, 
+  //   listing?.id,
+  //   router,
+  //   currentUser,
+  //   loginModal
+  // ]);
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
@@ -156,7 +166,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
                 totalPrice={totalPrice}
                 onChangeDate={(value) => setDateRange(value)}
                 dateRange={dateRange}
-                onSubmit={onCreateReservation}
+                onSubmit={onResereve}
                 disabled={isLoading}
                 disabledDates={disabledDates}
               />
@@ -164,7 +174,15 @@ const ListingClient: React.FC<ListingClientProps> = ({
           </div>
         </div>
       </div>
+      <ReservationModal
+        listingId={listing.id}
+        totalPrice={totalPrice}
+        endDate={dateRange.endDate!}
+        startDate={dateRange.startDate!}
+      />
+
     </Container>
+    
    );
 }
  
