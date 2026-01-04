@@ -42,6 +42,7 @@ export default async function getReservations(
       createdAt: reservation.createdAt.toISOString(),
       startDate: reservation.startDate.toISOString(),
       endDate: reservation.endDate.toISOString(),
+      nights: reservation.nights,
       listing: {
         ...reservation.listing,
         createdAt: reservation.listing.createdAt.toISOString(),

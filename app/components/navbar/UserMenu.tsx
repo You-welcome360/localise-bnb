@@ -12,6 +12,7 @@ import { SafeUser } from "@/app/types";
 
 import MenuItem from "./MenuItem";
 import Avatar from "../Avatar";
+import Link from "next/link";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null
@@ -105,7 +106,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-              <p className="text-lg pl-4">Hi , {currentUser.name}</p>
+              <Link href={'/'}><p className="text-lg pl-4">Hi , {currentUser.name}</p></Link>
                 <hr />
                 <MenuItem 
                   label="Booked Rooms" 

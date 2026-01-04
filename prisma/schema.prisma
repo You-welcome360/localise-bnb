@@ -72,6 +72,11 @@ model Reservation {
   listingId String @db.ObjectId  
   startDate DateTime
   endDate DateTime
+  nights Int
+  guestName String
+  phoneNumber String
+  emergencyNumber Int
+  ghanaCardNumber String
   totalPrice Int
   createdAt DateTime @default(now())
 

@@ -11,6 +11,7 @@ import ToasterProvider from '@/app/providers/ToasterProvider';
 import './globals.css'
 import ClientOnly from './components/ClientOnly';
 import getCurrentUser from './actions/getCurrentUser';
+import GuestInfoModal from './components/modals/GuestInfoModal';
 
 export const metadata = {
   title: 'LocaliseBNB',
@@ -33,6 +34,7 @@ export default async function RootLayout({
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
+          <GuestInfoModal />
           <LoginModal />
           <RegisterModal />
           <SearchModal />
